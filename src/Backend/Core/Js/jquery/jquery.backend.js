@@ -159,7 +159,10 @@
 			var id = $(this).attr('id');
 
 			// append the button
-			$(this).parent().after('<div class="buttonHolder"><a href="#" data-id="' + id + '" class="generatePasswordButton button"><span>' + options.generateLabel + '</span></a></div>');
+			$(this).closest('.form-group').after(
+				'	<div class="btn-group">' +
+				'		<a href="#" data-id="' + id + '" class="generatePasswordButton btn btn-default"><span>' + options.generateLabel + '</span></a>' +
+				'	</div>');
 
 			$('.generatePasswordButton').live('click', generatePassword);
 
@@ -297,7 +300,7 @@
 			var $this = $(this);
 
 			// add wrapper and tooltip
-			$this.html('<span>' + $this.html() + '</span><span style="display: none;" class="inlineEditTooltip">' + options.tooltip + '</span>');
+			$this.html('<span>' + $this.html() + '</span><span style="display: none;" class="inlineEditTooltip label label-primary">' + options.tooltip + '</span>');
 
 			// grab element
 			$span = $this.find('span');
@@ -438,7 +441,7 @@
 							destroyElement();
 
 							// show message
-							jsBackend.messages.add('error', $.parseJSON(XMLHttpRequest.responseText).message);
+							jsBackend.messages.add('danger', $.parseJSON(XMLHttpRequest.responseText).message);
 						}
 					});
 				}
@@ -497,12 +500,12 @@
 				if(blockSubmit && $('#addValue-' + id).val().replace(/^\s+|\s+$/g, '') !== '')
 				{
 					// show warning
-					$('#addValue-'+ id).parents('.oneLiner').append('<span style="display: none;" id="errorMessage-'+ id +'" class="formError">'+ options.errorMessage +'</span>');
+					$('#addValue-'+ id).parents('.oneLiner').append('<span style="display: none;" id="errorMessage-'+ id +'" class="formError text-danger">'+ options.errorMessage +'</span>');
 
 					// clear other timers
 					clearTimeout(timer);
 
-					// we need the timeout otherwise the error is show every time the user presses enter in the tagbox
+					// we need the timeout otherwise the error is show every time the user presses enter in the keyvaluebox
 					timer = setTimeout(function() { $('#errorMessage-'+ id).show(); }, 200);
 				}
 
@@ -510,11 +513,20 @@
 			});
 
 			// build replace html
-			var html = '<div class="tagsWrapper">' + '	<div class="oneLiner">' + '		<p><input class="inputText dontSubmit" id="addValue-' + id + '" name="addValue-' + id + '" type="text" /></p>' + '		<div class="buttonHolder">' + '			<a href="#" id="addButton-' + id + '" class="button icon iconAdd disabledButton';
-
-			if(options.showIconOnly) html += ' iconOnly';
-
-			html += '">' + '				<span>' + options.addLabel + '</span>' + '			</a>' + '		</div>' + '	</div>' + '	<div id="elementList-' + id + '" class="tagList">' + '	</div>' + '</div>';
+			var html =
+				'<div class="form-inline form-group keyValueWrapper">' +
+				'	<div class="form-group input-group">' +
+				'		<input class="form-control dontSubmit" id="addValue-' + id + '" name="addValue-' + id + '" type="text" />' +
+                '	    <a href="#" id="addButton-' + id + '" class="btn btn-primary input-group-addon">' +
+                '           <span class="fa fa-plus"></span>' +
+                (options.showIconOnly?'':'	        <span>' + options.addLabel + '</span>') +
+                '	    </a>' +
+				'   </div>' +
+                '</div>' +
+				'<div class="form-inline form-group">' +
+				'    <div id="elementList-' + id + '" class="form-group keyValueList">' +
+				'    </div>' +
+				'</div>';
 
 			// hide current element
 			$(this).css('visibility', 'hidden').css('position', 'absolute').css('top', '-9000px').css('left', '-9000px').attr('tabindex', '-1');
@@ -748,7 +760,7 @@
  */
 (function($)
 {
-	$.fn.tagBox = function(options)
+	$.fn.tagsBox = function(options)
 	{
 		// define defaults
 		var defaults =
@@ -788,7 +800,7 @@
 				if(blockSubmit && $('#addValue-' + id).val().replace(/^\s+|\s+$/g, '') !== '')
 				{
 					// show warning
-					$('#addValue-'+ id).parents('.oneLiner').append('<span style="display: none;" id="errorMessage-'+ id +'" class="formError">'+ options.errorMessage +'</span>');
+					$('#addValue-'+ id).parents('.oneLiner').append('<span style="display: none;" id="errorMessage-'+ id +'" class="formError text-danger">'+ options.errorMessage +'</span>');
 
 					// clear other timers
 					clearTimeout(timer);
@@ -801,21 +813,18 @@
 			});
 
 			// build replace html
-			var html = 	'<div class="tagsWrapper">' +
-						'	<div class="oneLiner">' +
-						'		<p><input class="inputText dontSubmit" id="addValue-' + id + '" name="addValue-' + id + '" type="text" /></p>' +
-						'		<div class="buttonHolder">' +
-						'			<a href="#" id="addButton-' + id + '" class="button icon iconAdd disabledButton';
-
-			if(options.showIconOnly) html += ' iconOnly';
-
-			html += 	'">' +
-						'				<span>' + options.addLabel + '</span>' +
-						'			</a>' +
-						'		</div>' +
-						'	</div>' +
-						'	<div id="elementList-' + id + '" class="tagList">' +
-						'	</div>' +
+			var html = 	'<div class="form-inline form-group tagsWrapper">' +
+						'	<div class="form-group input-group">' +
+                        '       <input class="form-control dontSubmit" id="addValue-' + id + '" name="addValue-' + id + '" type="text" />' +
+                        '       <a href="#" id="addButton-' + id + '" class="btn btn-success btn-xs input-group-addon">' +
+                        '           <span class="fa fa-plus"></span>' +
+                            (options.showIconOnly?'':'          <span>' + options.addLabel + '</span>') +
+                        '       </a>' +
+                        '   </div>' +
+						'</div>' +
+						'<div class="form-inline form-group">' +
+						'    <div id="elementList-' + id + '" class="form-group tagList">' +
+						'    </div>' +
 						'</div>';
 
 			// hide current element
@@ -982,15 +991,16 @@
 				else
 				{
 					// start html
-					html = '<ul>';
+					html = '<ul class="list-group">';
 
 					// loop elements
 					for(var i in elements)
 					{
-						var value = utils.string.stripForTag(elements[i]);
-
-						html += '	<li><span><strong>' + value + '</strong>' +
-								'		<a href="#" class="deleteButton-' + id + '" data-id="' + value + '" title="' + utils.string.stripForTag(options.removeLabel) + ' ' + value + '">' + options.removeLabel + '</a></span>' +
+                        var value = utils.string.stripForTag(elements[i]);
+                        
+						html += '	<li class="list-group-item">' +
+								'		<a href="#" class="btn btn-danger btn-xs deleteButton-' + id + '" data-id="' + id + '" title="' + utils.string.stripForTag(options.removeLabel) + ' ' + value + '"><span class="fa fa-trash"></span></a></span>' +
+								'       <span><strong>' + value + '</strong>' +
 								'	</li>';
 					}
 
@@ -1088,24 +1098,22 @@
 			// build replace html
 			var html =	'<div class="multipleSelectWrapper">' +
 						'	<div id="elementList-' + id + '" class="multipleSelectList">' + '	</div>' +
-						'	<div class="oneLiner">' +
-						'		<p>' +
-						'			<select class="select dontSubmit" id="addValue-' + id + '" name="addValue-' + id + '">';
+						'	<div class="input-group">' +
+                    '			<select class="form-control dontSubmit" id="addValue-' + id + '" name="addValue-' + id + '">';
 
 			for(var i = 0; i < possibleOptions.length; i++)
 			{
 				html +=	'				<option value="' + $(possibleOptions[i]).attr('value') + '">' + $(possibleOptions[i]).html() + '</option>';
 			}
 
-			html +=		'			</select>' +
-						'		</p>' +
-						'		<div class="buttonHolder">' +
-						'			<a href="#" id="addButton-' + id + '" class="button icon iconAdd';
+        html +=		'			</select>' +
+						'		<div class="input-group-btn">' +
+						'			<a href="#" id="addButton-' + id + '" class="btn btn-success';
 
 			if(options.showIconOnly) html += ' iconOnly';
 
 			html += 	'">' +
-						'				<span>' + options.addLabel + '</span>' +
+						'				<span class="glyphicon glyphicon-plus"></span>&nbsp;' + options.addLabel +
 						'			</a>' +
 						'		</div>' +
 						'	</div>' +
@@ -1199,18 +1207,16 @@
 				else
 				{
 					// start html
-					html = '<ul>';
+					html = '<ul class="list-unstyled">';
 
 					// loop elements
 					for(var i in elements)
 					{
 						html += '	<li class="oneLiner">' +
-								'		<p><span style="width: '+ $('#' + id).width() +'px">' + $('#' + id + ' option[value=' + elements[i] + ']').html() + '</span></p>' +
-								'		<div class="buttonHolder">' +
-								'			<a href="#" class="button icon iconDelete iconOnly deleteButton-' + id + '" data-id="' + elements[i] + '" title="' + options.removeLabel + '">' +
-								'				<span>' + options.removeLabel + '</span></a>' +
-								'			</a>' +
-								'		</div>' +
+								'		<span style="width: '+ $('#' + id).width() +'px">' + $('#' + id + ' option[value=' + elements[i] + ']').html() + '</span>' +
+                            '			<a href="#" class="btn btn-danger btn-xs deleteButton-' + id + '" data-id="' + elements[i] + '" title="' + options.removeLabel + '">' +
+                            '				<span class="glyphicon glyphicon-trash"></span>' +
+                            '           </a>' +
 								'	</li>';
 
 						// remove from dropdown
@@ -1322,11 +1328,18 @@
 			}
 
 			// build replace html
-			var html = '<div class="multipleTextWrapper">' + '	<div id="elementList-' + id + '" class="multipleTextList">' + '	</div>' + '	<div class="oneLiner">' + '		<p><input class="inputText dontSubmit" id="addValue-' + id + '" name="addValue-' + id + '" type="text" /></p>' + '		<div class="buttonHolder">' + '			<a href="#" id="addButton-' + id + '" class="button icon iconAdd disabledButton';
-
-			if(options.showIconOnly) html += ' iconOnly';
-
-			html += '">' + '				<span>' + options.addLabel + '</span>' + '			</a>' + '		</div>' + '	</div>' + '</div>';
+			var html =
+				'<div class="multipleTextWrapper">' +
+				'	<div id="elementList-' + id + '" class="form-group multipleTextList">' +
+				'	</div>' +
+				'	<div class="form-group input-group">' +
+				'       <input class="form-control dontSubmit" id="addValue-' + id + '" name="addValue-' + id + '" type="text" />' +
+                '		<a href="#" id="addButton-' + id + '" class="btn btn-success input-group-addon">' +
+                '           <span class="fa fa-plus"></span>' +
+                (options.showIconOnly?'':'          <span>' + options.addLabel + '</span>') +
+                '		</a>' +
+				'	</div>' +
+				'</div>';
 
 			// hide current element
 			$(this).css('visibility', 'hidden').css('position', 'absolute').css('top', '-9000px').css('left', '-9000px').attr('tabindex', '-1');
@@ -1519,16 +1532,17 @@
 				else
 				{
 					// start html
-					html = '<ul>';
+					html = '<ul class="list-unstyled">';
 
 					// loop elements
 					for(var i in elements)
 					{
-						html += '	<li class="oneLiner">' +
-								'		<p><input class="inputText dontSubmit inputField-' + id + '" name="inputField-' + id + '[]" type="text" value="' + elements[i] + '" /></p>' +
-								'		<div class="buttonHolder">' +
-								'			<a href="#" class="button icon iconDelete iconOnly deleteButton-' + id + '" data-id="' + elements[i] + '" title="' + options.removeLabel + '"><span>' + options.removeLabel + '</span></a>' +
-								'		</div>' +
+						html += '	<li class="form-group input-group">' +
+								'	    <input class="form-control dontSubmit inputField-' + id + '" name="inputField-' + id + '[]" type="text" value="' + elements[i] + '" />' +
+                                '		<a href="#" class="btn btn-danger input-group-addon deleteButton-' + id + '" data-id="' + elements[i] + '" title="' + options.removeLabel + '">' +
+                                '           <span class="fa fa-plus"></span>' +
+                                '			<span>' + options.removeLabel + '</span>' +
+                                '		</a>' +
 								'	</li>';
 					}
 

@@ -80,29 +80,29 @@ class Index extends BackendBaseActionIndex
         $this->frm->addTextarea(
             'site_html_header',
             $this->get('fork.settings')->get('Core', 'site_html_header', null),
-            'textarea code',
-            'textareaError code',
+            'form-control code',
+            'form-control danger code',
             true
         );
         $this->frm->addTextarea(
             'site_start_of_body_scripts',
             $this->get('fork.settings')->get('Core', 'site_start_of_body_scripts', null),
-            'textarea code',
-            'textareaError code',
+            'form-control code',
+            'form-control danger code',
             true
         );
         $this->frm->addTextarea(
             'site_html_footer',
             $this->get('fork.settings')->get('Core', 'site_html_footer', null),
-            'textarea code',
-            'textareaError code',
+            'form-control code',
+            'form-control danger code',
             true
         );
         $this->frm->addTextarea(
             'site_domains',
             implode("\n", (array) $this->get('fork.settings')->get('Core', 'site_domains', $defaultDomains)),
-            'textarea code',
-            'textareaError code'
+            'form-control code',
+            'form-control danger code'
         );
 
         // facebook settings

@@ -1,49 +1,75 @@
 {include:{$BACKEND_CORE_PATH}/Layout/Templates/Head.tpl}
 {include:{$BACKEND_CORE_PATH}/Layout/Templates/StructureStartModule.tpl}
-
-<div class="pageTitle">
-	<h2>{$lblLocation|ucfirst}: {$lblAdd}</h2>
+<div class="row fork-module-heading">
+  <div class="col-md-12">
+    <h2>{$lblAdd|ucfirst}</h2>
+  </div>
 </div>
-
 {form:add}
-	<p>
-		<label for="title">{$lblTitle|ucfirst}</label>
-		{$txtTitle} {$txtTitleError}
-	</p>
-
-	<div class="box horizontal">
-		<div class="heading">
-			<h3>{$lblAddress|ucfirst}</h3>
-		</div>
-		<div class="options">
-			<p>
-				<label for="street">{$lblStreet|ucfirst}<abbr title="{$lblRequiredField}">*</abbr></label>
-				{$txtStreet} {$txtStreetError}
-			</p>
-			<p>
-				<label for="number">{$lblNumber|ucfirst}<abbr title="{$lblRequiredField}">*</abbr></label>
-				{$txtNumber} {$txtNumberError}
-			</p>
-			<p>
-				<label for="zip">{$lblZip|ucfirst}<abbr title="{$lblRequiredField}">*</abbr></label>
-				{$txtZip} {$txtZipError}
-			</p>
-			<p>
-				<label for="city">{$lblCity|ucfirst}<abbr title="{$lblRequiredField}">*</abbr></label>
-				{$txtCity} {$txtCityError}
-			</p>
-			<p>
-				<label for="country">{$lblCountry|ucfirst}<abbr title="{$lblRequiredField}">*</abbr></label>
-				{$ddmCountry} {$ddmCountryError}
-			</p>
-		</div>
-	</div>
-
-	<div class="fullwidthOptions">
-		<div class="buttonHolderRight">
-			<input id="addButton" class="inputButton button mainButton" type="submit" name="add" value="{$lblAddToMap|ucfirst}" />
-		</div>
-	</div>
+  <div class="row fork-module-content">
+    <div class="col-md-12">
+      <div class="form-group{option:txtTitleError} has-error{/option:txtTitleError}">
+        <label for="title" class="control-label">{$lblTitle|ucfirst}</label>
+        {$txtTitle} {$txtTitleError}
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {$lblAddress|ucfirst}
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group{option:txtStreetError} has-error{/option:txtStreetError}">
+            <label for="street" class="control-label">
+              {$lblStreet|ucfirst}
+              <abbr data-toggle="tooltip" title="{$lblRequiredField|ucfirst}">*</abbr>
+            </label>
+            {$txtStreet} {$txtStreetError}
+          </div>
+          <div class="form-group{option:txtNumberError} has-error{/option:txtNumberError}">
+            <label for="number" class="control-label">
+              {$lblNumber|ucfirst}
+              <abbr data-toggle="tooltip" title="{$lblRequiredField|ucfirst}">*</abbr>
+            </label>
+            {$txtNumber} {$txtNumberError}
+          </div>
+          <div class="form-group{option:txtZipError} has-error{/option:txtZipError}">
+            <label for="zip" class="control-label">
+              {$lblZip|ucfirst}
+              <abbr data-toggle="tooltip" title="{$lblRequiredField|ucfirst}">*</abbr>
+            </label>
+            {$txtZip} {$txtZipError}
+          </div>
+          <div class="form-group{option:txtCityError} has-error{/option:txtCityError}">
+            <label for="city" class="control-label">
+              {$lblCity|ucfirst}
+              <abbr data-toggle="tooltip" title="{$lblRequiredField|ucfirst}">*</abbr>
+            </label>
+            {$txtCity} {$txtCityError}
+          </div>
+          <div class="form-group{option:ddmCountryError} has-error{/option:ddmCountryError}">
+            <label for="country" class="control-label">
+              {$lblCountry|ucfirst}
+              <abbr data-toggle="tooltip" title="{$lblRequiredField|ucfirst}">*</abbr>
+            </label>
+            {$ddmCountry} {$ddmCountryError}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row fork-module-actions">
+    <div class="col-md-12">
+      <div class="btn-toolbar">
+        <div class="btn-group pull-right" role="group">
+          <button id="addButton" type="submit" name="add" class="btn btn-success">
+            <span class="fa fa-plus"></span>&nbsp;
+            {$lblAddToMap|ucfirst}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 {/form:add}
 
 {include:{$BACKEND_CORE_PATH}/Layout/Templates/StructureEndModule.tpl}

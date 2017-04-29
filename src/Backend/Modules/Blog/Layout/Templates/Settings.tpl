@@ -1,114 +1,205 @@
 {include:{$BACKEND_CORE_PATH}/Layout/Templates/Head.tpl}
 {include:{$BACKEND_CORE_PATH}/Layout/Templates/StructureStartModule.tpl}
-
-<div class="pageTitle">
-	<h2>{$lblModuleSettings|ucfirst}: {$lblBlog}</h2>
+<div class="row fork-module-heading">
+  <div class="col-md-12">
+    <h2>{$lblSettings|ucfirst}</h2>
+  </div>
 </div>
-
 {form:settings}
-	<div class="box">
-		<div class="heading">
-			<h3>{$lblPagination|ucfirst}</h3>
-		</div>
-		<div class="options">
-			<label for="overviewNumberOfItems">{$lblItemsPerPage|ucfirst}</label>
-			{$ddmOverviewNumberOfItems} {$ddmOverviewNumberOfItemsError}
-		</div>
-		<div class="options">
-			<label for="recentArticlesFullNumberOfItems">{$msgNumItemsInRecentArticlesFull|ucfirst}</label>
-			{$ddmRecentArticlesFullNumberOfItems} {$ddmRecentArticlesFullNumberOfItemsError}
-		</div>
-		<div class="options">
-			<label for="recentArticlesListNumberOfItems">{$msgNumItemsInRecentArticlesList|ucfirst}</label>
-			{$ddmRecentArticlesListNumberOfItems} {$ddmRecentArticlesListNumberOfItemsError}
-		</div>
-	</div>
-
-	<div class="box">
-		<div class="heading">
-			<h3>{$lblComments|ucfirst}</h3>
-		</div>
-		<div class="options">
-			<ul class="inputList">
-				<li><label for="allowComments">{$chkAllowComments} {$lblAllowComments|ucfirst}</label></li>
-				<li><label for="moderation">{$chkModeration} {$lblEnableModeration|ucfirst}</label></li>
-				<li>
-					<label for="spamfilter">{$chkSpamfilter} {$lblFilterCommentsForSpam|ucfirst}</label>
-					<span class="helpTxt">
-						{$msgHelpSpamFilter}
-						{option:noAkismetKey}<span class="infoMessage"><br />{$msgNoAkismetKey|sprintf:{$var|geturl:'index':'settings'}}</span>{/option:noAkismetKey}
-					</span>
-				</li>
-			</ul>
-			<p class="p0">{$msgFollowAllCommentsInRSS|sprintf:{$commentsRSSURL}}</p>
-		</div>
-	</div>
-
-	{option:isGod}
-	<div class="box">
-		<div class="heading">
-			<h3>{$lblImage|ucfirst}</h3>
-		</div>
-		<div class="options">
-			<label for="showImageForm">{$chkShowImageForm} {$msgShowImageForm}</label>
-		</div>
-	</div>
-	{/option:isGod}
-
-	<div class="box">
-		<div class="heading">
-			<h3>{$lblNotifications|ucfirst}</h3>
-		</div>
-		<div class="options">
-			<ul class="inputList p0">
-				<li><label for="notifyByEmailOnNewCommentToModerate">{$chkNotifyByEmailOnNewCommentToModerate} {$msgNotifyByEmailOnNewCommentToModerate|ucfirst}</label></li>
-				<li><label for="notifyByEmailOnNewComment">{$chkNotifyByEmailOnNewComment} {$msgNotifyByEmailOnNewComment|ucfirst}</label></li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="box">
-		<div class="heading">
-			<h3>{$lblSEO}</h3>
-		</div>
-		<div class="options">
-			<p>{$msgHelpPingServices}:</p>
-			<ul class="inputList p0">
-				<li><label for="pingServices">{$chkPingServices} {$lblPingBlogServices|ucfirst}</label></li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="box">
-		<div class="horizontal">
-			<div class="heading">
-				<h3>{$lblRSSFeed}</h3>
-			</div>
-			<div class="options">
-				<label for="rssTitle">{$lblTitle|ucfirst}<abbr title="{$lblRequiredField|ucfirst}">*</abbr></label>
-				{$txtRssTitle} {$txtRssTitleError}
-				<span class="helpTxt">{$msgHelpRSSTitle}</span>
-			</div>
-			<div class="options">
-				<label for="rssDescription">{$lblDescription|ucfirst}</label>
-				{$txtRssDescription} {$txtRssDescriptionError}
-				<span class="helpTxt">{$msgHelpRSSDescription}</span>
-			</div>
-			<div class="options">
-				<p>{$msgHelpMeta}:</p>
-				<ul class="inputList p0">
-					<li><label for="rssMeta">{$chkRssMeta} {$lblMetaInformation|ucfirst}</label></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-
-	<div class="fullwidthOptions">
-		<div class="buttonHolderRight">
-			<input id="save" class="inputButton button mainButton" type="submit" name="save" value="{$lblSave|ucfirst}" />
-		</div>
-	</div>
+  <div class="row fork-module-content">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {$lblPagination|ucfirst}
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group{option:ddmOverviewNumberOfItemsError} has-error{/option:ddmOverviewNumberOfItemsError}">
+                <label for="overviewNumberOfItems" class="control-label">{$lblItemsPerPage|ucfirst}</label>
+                <br>
+                <br>
+                {$ddmOverviewNumberOfItems} {$ddmOverviewNumberOfItemsError}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group{option:ddmRecentArticlesFullNumberOfItemsError} has-error{/option:ddmRecentArticlesFullNumberOfItemsError}">
+                <label for="recentArticlesFullNumberOfItems" class="control-label">{$msgNumItemsInRecentArticlesFull|ucfirst}</label>
+                {$ddmRecentArticlesFullNumberOfItems} {$ddmRecentArticlesFullNumberOfItemsError}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group{option:ddmRecentArticlesListNumberOfItemsError} has-error{/option:ddmRecentArticlesListNumberOfItemsError}">
+                <label for="recentArticlesListNumberOfItems" class="control-label">{$msgNumItemsInRecentArticlesList|ucfirst}</label>
+                {$ddmRecentArticlesListNumberOfItems} {$ddmRecentArticlesListNumberOfItemsError}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row fork-module-content">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {$lblComments|ucfirst}
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <ul class="list-unstyled">
+              <li class="checkbox">
+                <label for="allowComments">
+                  {$chkAllowComments} {$lblAllowComments|ucfirst}
+                </label>
+              </li>
+              <li class="checkbox">
+                <label for="moderation">
+                  {$chkModeration} {$lblEnableModeration|ucfirst}
+                </label>
+              </li>
+              <li class="checkbox">
+                <label for="spamfilter">
+                  {$chkSpamfilter} {$lblFilterCommentsForSpam|ucfirst}
+                </label>
+                <p class="help-block">
+                  {$msgHelpSpamFilter}
+                  {option:noAkismetKey}
+                  <br />
+                  <span class="text-warning">
+                    <span class="fa fa-warning"></span> {$msgNoAkismetKey|sprintf:{$var|geturl:'index':'settings'}}
+                  </span>
+                  {/option:noAkismetKey}
+                </p>
+              </li>
+            </ul>
+            <p class="help-block">{$msgFollowAllCommentsInRSS|sprintf:{$commentsRSSURL}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {option:isGod}
+  <div class="row fork-module-content">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {$lblImage|ucfirst}
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <ul class="list-unstyled">
+              <li class="checkbox">
+                <label for="showImageForm">
+                  {$chkShowImageForm} {$msgShowImageForm}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {/option:isGod}
+  <div class="row fork-module-content">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {$lblNotifications|ucfirst}
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <ul class="list-unstyled">
+              <li class="checkbox">
+                <label for="notifyByEmailOnNewCommentToModerate">
+                  {$chkNotifyByEmailOnNewCommentToModerate} {$msgNotifyByEmailOnNewCommentToModerate|ucfirst}
+                </label>
+              </li>
+              <li class="checkbox">
+                <label for="notifyByEmailOnNewComment">
+                  {$chkNotifyByEmailOnNewComment} {$msgNotifyByEmailOnNewComment|ucfirst}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row fork-module-content">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {$lblSEO|ucfirst}
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <p>{$msgHelpPingServices}:</p>
+            <ul class="list-unstyled">
+              <li class="checkbox">
+                <label for="pingServices">
+                  {$chkPingServices} {$lblPingBlogServices|ucfirst}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row fork-module-content">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {$lblRSSFeed|ucfirst}
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group{option:txtRssTitleError} has-error{/option:txtRssTitleError}">
+            <label for="rssTitle" class="control-label">
+              {$lblTitle|ucfirst}
+              <abbr data-toggle="tooltip" title="{$lblRequiredField|ucfirst}">*</abbr>
+            </label>
+            <p class="help-block">{$msgHelpRSSTitle}</p>
+            {$txtRssTitle} {$txtRssTitleError}
+          </div>
+          <div class="form-group{option:txtRssDescriptionError} has-error{/option:txtRssDescriptionError}">
+            <label for="rssDescription" class="control-label">{$lblDescription|ucfirst}</label>
+            <p class="help-block">{$msgHelpRSSDescription}</p>
+            {$txtRssDescription} {$txtRssDescriptionError}
+          </div>
+          <div class="form-group">
+            <p>{$msgHelpMeta}:</p>
+            <ul class="list-unstyled">
+              <li class="checkbox">
+                <label for="rssMeta">{$chkRssMeta} {$lblMetaInformation|ucfirst}</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row fork-module-actions">
+    <div class="col-md-12">
+      <div class="btn-toolbar">
+        <div class="btn-group pull-right" role="group">
+          <button id="save" type="submit" name="save" class="btn btn-success"><span class="fa fa-floppy-o"></span> {$lblSave|ucfirst}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {/form:settings}
-
 {include:{$BACKEND_CORE_PATH}/Layout/Templates/StructureEndModule.tpl}
 {include:{$BACKEND_CORE_PATH}/Layout/Templates/Footer.tpl}

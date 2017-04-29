@@ -107,10 +107,10 @@ class Index extends BackendBaseActionIndex
             );
 
             // invalid form-token?
-            if ($this->frm->getToken() != $this->frm->getField('form_token')->getValue()) {
+            //if ($this->frm->getToken() != $this->frm->getField('form_token')->getValue()) {
                 // set a correct header, so bots understand they can't mess with us.
-                throw new BadRequestHttpException();
-            }
+                //throw new BadRequestHttpException();
+            //}
 
             // get the user's id
             $userId = BackendUsersModel::getIdByEmail($txtEmail->getValue());

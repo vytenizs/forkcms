@@ -176,27 +176,26 @@ class Model extends \Common\Core\Model
         // module
         if ($module !== null) {
             $query .= ' AND i.module = ?';
-            $parameters[] = (string) $module;
+            $parameters[] = (string)$module;
         }
 
         // type
         if ($type !== null) {
             $query .= ' AND i.type = ?';
-            $parameters[] = (string) $type;
+            $parameters[] = (string)$type;
         }
 
         // get extras
-        $extras = (array) self::getContainer()->get('database')->getRecords($query, $parameters);
+        $extras = (array)self::getContainer()->get('database')->getRecords($query, $parameters);
 
         // loop found extras
         foreach ($extras as $extra) {
-            $deleteExtra = true;
+            // set delete extra only if data is not null and extra data is null
+            $deleteExtra = !($extra['data'] === null && $data !== null);
 
-            // match by parameters
-            if ($data !== null && $extra['data'] !== null) {
-                $extraData = (array) unserialize($extra['data']);
-
-                // do not delete extra if parameters do not match
+            // if delete extra is set we still want to match by parameters if possible
+            if ($deleteExtra && $data !== null) {
+                $extraData = $extra['data'] === null ? array() : (array)unserialize($extra['data']);
                 foreach ($data as $dataKey => $dataValue) {
                     if (isset($extraData[$dataKey]) && $dataValue != $extraData[$dataKey]) {
                         $deleteExtra = false;
@@ -507,7 +506,6 @@ class Model extends \Common\Core\Model
     /**
      * Get a certain module-setting
      *
-     * @deprecated
      * @param string $module       The module in which the setting is stored.
      * @param string $key          The name of the setting.
      * @param mixed  $defaultValue The value to return if the setting isn't present.
@@ -527,7 +525,6 @@ class Model extends \Common\Core\Model
     /**
      * Get all module settings at once
      *
-     * @deprecated
      * @param string $module You can get all settings for a module.
      * @return array
      * @throws Exception If the module settings were not saved in a correct format

@@ -1,169 +1,174 @@
 {include:{$BACKEND_CORE_PATH}/Layout/Templates/Head.tpl}
 {include:{$BACKEND_CORE_PATH}/Layout/Templates/StructureStartModule.tpl}
-
-<div class="pageTitle">
-	<h2>{$lblBlog|ucfirst}: {$lblAdd}</h2>
+<div class="row fork-module-heading">
+  <div class="col-md-12">
+    <h2>{$lblAdd|ucfirst}</h2>
+  </div>
 </div>
-
 {form:add}
-	<label for="title">{$lblTitle|ucfirst}</label>
-	{$txtTitle} {$txtTitleError}
-
-	<div id="pageUrl">
-		<div class="oneLiner">
-			{option:detailURL}<p><span><a href="{$detailURL}">{$detailURL}/<span id="generatedUrl"></span></a></span></p>{/option:detailURL}
-			{option:!detailURL}<p class="infoMessage">{$errNoModuleLinked}</p>{/option:!detailURL}
-		</div>
-	</div>
-
-	<div class="tabs">
-		<ul>
-			<li><a href="#tabContent">{$lblContent|ucfirst}</a></li>
-			<li><a href="#tabPermissions">{$lblComments|ucfirst}</a></li>
-			<li><a href="#tabSEO">{$lblSEO|ucfirst}</a></li>
-		</ul>
-
-		<div id="tabContent">
-			<table width="100%">
-				<tr>
-					<td id="leftColumn">
-
-						{* Main content *}
-						<div class="box">
-							<div class="heading">
-								<h3>
-									<label for="text">{$lblMainContent|ucfirst}<abbr title="{$lblRequiredField}">*</abbr></label>
-								</h3>
-							</div>
-							<div class="optionsRTE">
-								{$txtText} {$txtTextError}
-							</div>
-						</div>
-
-						{* Image *}
-						{option:imageIsAllowed}
-						<div class="box">
-							<div class="heading">
-								<h3>{$lblImage|ucfirst}</h3>
-							</div>
-							<div class="options">
-								<p>
-									<label for="image">{$lblImage|ucfirst}</label>
-									{$fileImage} {$fileImageError}
-								</p>
-							</div>
-						</div>
-						{/option:imageIsAllowed}
-
-						{* Summary *}
-						<div class="box">
-							<div class="heading">
-								<div class="oneLiner">
-									<h3>
-										<label for="introduction">{$lblSummary|ucfirst}</label>
-									</h3>
-									<abbr class="help">(?)</abbr>
-									<div class="tooltip" style="display: none;">
-										<p>{$msgHelpSummary}</p>
-									</div>
-								</div>
-							</div>
-							<div class="optionsRTE">
-								{$txtIntroduction} {$txtIntroductionError}
-							</div>
-						</div>
-
-					</td>
-
-					<td id="sidebar">
-						<div id="publishOptions" class="box">
-							<div class="heading">
-								<h3>{$lblStatus|ucfirst}</h3>
-							</div>
-
-							<div class="options">
-								<ul class="inputList">
-									{iteration:hidden}
-									<li>
-										{$hidden.rbtHidden}
-										<label for="{$hidden.id}">{$hidden.label}</label>
-									</li>
-									{/iteration:hidden}
-								</ul>
-							</div>
-
-							<div class="options">
-								<p class="p0"><label for="publishOnDate">{$lblPublishOn|ucfirst}</label></p>
-								<div class="oneLiner">
-									<p>
-										{$txtPublishOnDate} {$txtPublishOnDateError}
-									</p>
-									<p>
-										<label for="publishOnTime">{$lblAt}</label>
-									</p>
-									<p>
-										{$txtPublishOnTime} {$txtPublishOnTimeError}
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="box" id="articleMeta">
-							<div class="heading">
-								<h3>{$lblMetaData|ucfirst}</h3>
-							</div>
-							<div class="options">
-								<label for="categoryId">{$lblCategory|ucfirst}</label>
-								{$ddmCategoryId} {$ddmCategoryIdError}
-							</div>
-							<div class="options">
-								<label for="userId">{$lblAuthor|ucfirst}</label>
-								{$ddmUserId} {$ddmUserIdError}
-							</div>
-							{option:showTagsIndex}
-								<div class="options">
-									<label for="tags">{$lblTags|ucfirst}</label>
-									{$txtTags} {$txtTagsError}
-								</div>
-							{/option:showTagsIndex}
-						</div>
-
-					</td>
-				</tr>
-			</table>
-		</div>
-
-		<div id="tabPermissions">
-			<table width="100%">
-				<tr>
-					<td>
-						{$chkAllowComments} <label for="allowComments">{$lblAllowComments|ucfirst}</label>
-					</td>
-				</tr>
-			</table>
-		</div>
-
-		<div id="tabSEO">
-			{include:{$BACKEND_CORE_PATH}/Layout/Templates/Seo.tpl}
-		</div>
-	</div>
-
-	<div class="fullwidthOptions">
-		<div class="buttonHolderRight">
-			<input id="addButton" class="inputButton button mainButton" type="submit" name="add" value="{$lblPublish|ucfirst}" />
-			<a href="#" id="saveAsDraft" class="inputButton button"><span>{$lblSaveDraft|ucfirst}</span></a>
-		</div>
-	</div>
-
-	<div id="addCategoryDialog" class="forkForms" title="{$lblAddCategory|ucfirst}" style="display: none;">
-		<div id="templateList">
-			<p>
-				<label for="categoryTitle">{$lblTitle|ucfirst}<abbr title="{$lblRequiredField}">*</abbr></label>
-				<input type="text" name="categoryTitle" id="categoryTitle" class="inputText" maxlength="255" />
-				<span class="formError" id="categoryTitleError" style="display: none;">{$errFieldIsRequired|ucfirst}</span>
-			</p>
-		</div>
-	</div>
+  <div class="row fork-module-content">
+    <div class="col-md-12">
+      <div class="form-group{option:txtTitleError} has-error{/option:txtTitleError}">
+        <label class="control-label" for="title">{$lblTitle|ucfirst}</label>
+        {$txtTitle} {$txtTitleError}
+      </div>
+      {option:detailURL}
+        <a href="{$detailURL}">
+          <small>{$detailURL}/<span id="generatedUrl"></span></small>
+        </a>
+      {/option:detailURL}
+      {option:!detailURL}
+      <p class="text-warning"><span class="fa fa-warning"></span> {$errNoModuleLinked}</p>
+      {/option:!detailURL}
+    </div>
+  </div>
+  <div class="row fork-module-content">
+    <div class="col-md-12">
+      <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#tabContent" aria-controls="content" role="tab" data-toggle="tab">{$lblContent|ucfirst}</a>
+          </li>
+          <li role="presentation">
+            <a href="#tabComments" aria-controls="comments" role="tab" data-toggle="tab">{$lblComments|ucfirst}</a>
+          </li>
+          <li role="presentation">
+            <a href="#tabSEO" aria-controls="seo" role="tab" data-toggle="tab">{$lblSEO|ucfirst}</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="tabContent">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group{option:txtTextError} has-error{/option:txtTextError}">
+                  <label for="text" class="control-label">
+                    {$lblMainContent|ucfirst}
+                    <abbr data-toggle="tooltip" title="{$lblRequiredField|ucfirst}">*</abbr>
+                  </label>
+                  {$txtText} {$txtTextError}
+                </div>
+                {option:imageIsAllowed}
+                <div class="form-group{option:fileImageError} has-error{/option:fileImageError}">
+                  <label for="image" class="control-label">{$lblImage|ucfirst}</label>
+                  {$fileImage} {$fileImageError}
+                </div>
+                {/option:imageIsAllowed}
+                <div class="form-group{option:txtIntroductionError} has-error{/option:txtIntroductionError}">
+                  <label for="introduction" class="control-label">
+                    {$lblSummary|ucfirst}
+                    <abbr class="fa fa-info-circle" data-toggle="tooltip" title="{$msgHelpSummary}"></abbr>
+                  </label>
+                  {$txtIntroduction} {$txtIntroductionError}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{$lblStatus|ucfirst}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <ul class="list-unstyled">
+                        {iteration:hidden}
+                        <li class="radio">
+                          <label for="{$hidden.id}">{$hidden.rbtHidden} {$hidden.label}</label>
+                        </li>
+                        {/iteration:hidden}
+                      </ul>
+                    </div>
+                    <div class="form-group{option:txtPublishOnDateError} has-error{/option:txtPublishOnDateError}">
+                      <label for="publishOnDate" class="control-label">{$lblPublishOn|ucfirst}</label>
+                      {$txtPublishOnDate} {$txtPublishOnDateError}
+                    </div>
+                    <div class="form-group{option:txtPublishOnTimeError} has-error{/option:txtPublishOnTimeError}">
+                      <label for="publishOnTime" class="control-label">{$lblAt}</label>
+                      {$txtPublishOnTime} {$txtPublishOnTimeError}
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{$lblMetaData|ucfirst}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="form-group{option:ddmCategoryIdError} has-error{/option:ddmCategoryIdError}">
+                      <label for="categoryId" class="control-label">{$lblCategory|ucfirst}</label>
+                      {$ddmCategoryId} {$ddmCategoryIdError}
+                    </div>
+                    <div class="form-group{option:ddmUserIdError} has-error{/option:ddmUserIdError}">
+                      <label for="userId" class="control-label">{$lblAuthor|ucfirst}</label>
+                      {$ddmUserId} {$ddmUserIdError}
+                    </div>
+                    {option:showTagsIndex}
+                    <div class="form-group{option:txtTagsError} has-error{/option:txtTagsError}">
+                      <label for="tags" class="control-label">{$lblTags|ucfirst}</label>
+                      {$txtTags} {$txtTagsError}
+                    </div>
+                    {/option:showTagsIndex}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="tabComments">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <ul class="list-unstyled">
+                    <li class="checkbox">
+                      <label for="allowComments">{$chkAllowComments} {$lblAllowComments|ucfirst}</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="tabSEO">
+            {include:{$BACKEND_CORE_PATH}/Layout/Templates/Seo.tpl}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row fork-module-actions">
+    <div class="col-md-12">
+      <div class="btn-toolbar">
+        <div class="btn-group pull-right" role="group">
+          <a href="#" id="saveAsDraft" class="btn btn-default">
+            <span class="fa fa-file-o"></span>&nbsp;
+            {$lblSaveDraft|ucfirst}
+          </a>
+          <button id="addButton" type="submit" name="add" class="btn btn-success">
+            <span class="fa fa-plus"></span>&nbsp;
+            {$lblAdd|ucfirst}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="addCategoryDialog" tabindex="-1" role="dialog" aria-labelledby="{$lblAddCategory|ucfirst}" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title h4">{$lblAddCategory|ucfirst}</span>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="categoryTitle" class="control-label">
+              {$lblTitle|ucfirst}
+              <abbr title="{$lblRequiredField|ucfirst}"></abbr>
+            </label>
+            <input type="text" name="categoryTitle" id="categoryTitle" class="form-control" maxlength="255" />
+            <p class="text-danger" id="categoryTitleError" style="display: none;">{$errFieldIsRequired|ucfirst}</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-times"></span> {$lblCancel|ucfirst}</button>
+          <button id="addCategorySubmit" type="button" class="btn btn-success"><span class="fa fa-check"></span> {$lblOK|ucfirst}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {/form:add}
 
 {include:{$BACKEND_CORE_PATH}/Layout/Templates/StructureEndModule.tpl}

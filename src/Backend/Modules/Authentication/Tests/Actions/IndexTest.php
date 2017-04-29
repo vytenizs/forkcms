@@ -100,7 +100,11 @@ class IndexTest extends WebTestCase
         ));
 
         $this->assertContains(
-            'now editing:',
+            'Dashboard',
+            $client->getResponse()->getContent()
+        );
+        $this->assertContains(
+            'Pages',
             $client->getResponse()->getContent()
         );
 
@@ -167,7 +171,7 @@ class IndexTest extends WebTestCase
         ));
 
         $this->assertContains(
-            'Users: edit user "Users User"',
+            'Edit user "Users User"',
             $client->getResponse()->getContent()
         );
 

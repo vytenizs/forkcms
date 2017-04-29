@@ -140,10 +140,12 @@ class Action extends Object
     public function execute()
     {
         // add jquery, we will need this in every action, so add it globally
-        $this->header->addJS('jquery/jquery.js', 'Core', false);
-        $this->header->addJS('jquery/jquery.ui.js', 'Core', false);
-        $this->header->addJS('jquery/jquery.ui.dialog.patch.js', 'Core');
-        $this->header->addJS('jquery/jquery.tools.js', 'Core', false);
+        $this->header->addJS('/bower_components/jquery/dist/jquery.min.js', 'Core', false, true);
+        $this->header->addJS('/bower_components/jquery-migrate/jquery-migrate.min.js', 'Core', false, true);
+        $this->header->addJS('/bower_components/jquery-ui/jquery-ui.min.js', 'Core', false, true);
+        $this->header->addJS('/bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js', 'Core', false, true);
+        $this->header->addJS('/bower_components/typeahead.js/dist/typeahead.bundle.min.js', 'Core', false, true);
+        $this->header->addJS('/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js', 'Core', false, true);
         $this->header->addJS('jquery/jquery.backend.js', 'Core');
 
         // add items that always need to be loaded
@@ -161,8 +163,8 @@ class Action extends Object
         }
 
         // add core css files
-        $this->header->addCSS('reset.css', 'Core');
-        $this->header->addCSS('jquery_ui/fork/jquery_ui.css', 'Core', false, false);
+        $this->header->addCSS('/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css', 'Core', true);
+        $this->header->addCSS('/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css', 'Core', true);
         $this->header->addCSS('screen.css', 'Core');
         $this->header->addCSS('debug.css', 'Core');
 

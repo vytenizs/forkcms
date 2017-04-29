@@ -203,7 +203,7 @@ class Edit extends BackendBaseActionEdit
         $categories['new_category'] = \SpoonFilter::ucfirst(BL::getLabel('AddCategory'));
 
         // create elements
-        $this->frm->addText('title', $this->record['title'], null, 'inputText title', 'inputTextError title');
+        $this->frm->addText('title', $this->record['title'], null, 'form-control title', 'form-control danger title');
         $this->frm->addEditor('text', $this->record['text']);
         $this->frm->addEditor('introduction', $this->record['introduction']);
         $this->frm->addRadiobutton('hidden', $rbtHiddenValues, $this->record['hidden']);
@@ -217,8 +217,8 @@ class Edit extends BackendBaseActionEdit
             'tags',
             BackendTagsModel::getTags($this->URL->getModule(), $this->record['id']),
             null,
-            'inputText tagBox',
-            'inputTextError tagBox'
+            'form-control js-tags-input',
+            'form-control danger js-tags-input'
         );
         $this->frm->addDate('publish_on_date', $this->record['publish_on']);
         $this->frm->addTime('publish_on_time', date('H:i', $this->record['publish_on']));

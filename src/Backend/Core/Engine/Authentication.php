@@ -117,7 +117,7 @@ class Authentication
     public static function cleanupOldSessions()
     {
         // remove all sessions that are invalid (older then 30 min)
-        BackendModel::get('database')->delete('users_sessions', 'date <= DATE_SUB(NOW(), INTERVAL 30 MINUTE)');
+        BackendModel::get('database')->delete('users_sessions', 'date <= DATE_SUB(NOW(), INTERVAL 1 DAY)');
     }
 
     /**
@@ -418,7 +418,7 @@ class Authentication
             $session['user_id'] = $userId;
             $session['secret_key'] = static::getEncryptedString(\SpoonSession::getSessionId(), $userId);
             $session['session_id'] = \SpoonSession::getSessionId();
-            $session['date'] = BackendModel::getUTCDate();
+            $session['date'] = date('Y-m-d H:i:s');
 
             // insert a new row in the session-table
             $db->insert('users_sessions', $session);

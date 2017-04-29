@@ -1,5 +1,7 @@
-				</div>
-			</div>
-		</td>
-	</tr>
-</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="root-footer"></div>
+</div>
