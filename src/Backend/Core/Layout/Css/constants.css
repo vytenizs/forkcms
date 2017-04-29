@@ -1,3 +1,8 @@
+.align-middle {
+  display: table-cell;
+  vertical-align: middle !important;
+}
+
 .inline-block {
   display: inline-block !important;
   float: none !important;

@@ -1,9 +1,11 @@
 html {
   min-height: 100%;
+  background-color: #EBF3F9;
 }
 
 body {
   overflow-y: scroll;
+  background-color: transparent;
 }
 
 @media (min-width: 992px) {
@@ -11,7 +13,6 @@ body {
     padding-top: 70px;
   }
 }
-
 #content {
   padding-bottom: 50px;
 }
@@ -33,10 +34,12 @@ h3 + .btn-toolbar,
 h4 + .btn-toolbar {
   clear: none;
   float: right;
-
-  & + * {
-    clear: both;
-  }
+}
+h1 + .btn-toolbar + *,
+h2 + .btn-toolbar + *,
+h3 + .btn-toolbar + *,
+h4 + .btn-toolbar + * {
+  clear: both;
 }
 
 textarea {
@@ -58,7 +61,7 @@ textarea {
 
 .clickToEdit span {
   background: #666;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   color: #FFF;
   display: block;
   margin: 0 auto;
@@ -67,7 +70,6 @@ textarea {
   line-height: 1;
   font-size: 12px;
   font-weight: 700;
-
   /* @inc .rc */
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
