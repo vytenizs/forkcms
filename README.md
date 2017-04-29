@@ -6,6 +6,13 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/forkcms/forkcms/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/forkcms/forkcms/?branch=master)
 [![Slack Status](https://fork-cms.herokuapp.com/badge.svg)](https://fork-cms.herokuapp.com/)
 
+## Purpose
+
+This branch is dedicated to those people that needs 3.x support.
+Those who have lots of projects on this version will find this useful.
+Bootstrap backend with a custom theme is added as an additional feature.
+If you have any issues please let me know or make a PR.
+
 ## Installation
 
 1. Run `composer create-project forkcms/forkcms .` in your document root.
