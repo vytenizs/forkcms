@@ -279,6 +279,8 @@ jsBackend.ckeditor =
             // bind on some global events
             CKEDITOR.on('dialogDefinition', jsBackend.ckeditor.onDialogDefinition);
             CKEDITOR.on('instanceReady', jsBackend.ckeditor.onReady);
+            CKEDITOR.dtd.$removeEmpty.span = 0;
+            CKEDITOR.dtd.$removeEmpty.i = 0;
 
             // load the editors
             jsBackend.ckeditor.load();
