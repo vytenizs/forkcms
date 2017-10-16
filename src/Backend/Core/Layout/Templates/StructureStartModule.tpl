@@ -2,6 +2,7 @@
   <div id="root">
   {include:{$BACKEND_CORE_PATH}/Layout/Templates/Header.tpl}
   <div id="content" class="container">
+    {include:{$BACKEND_CORE_PATH}/Layout/Templates/Messaging.tpl}
     <div class="row">
       <div class="col-md-3">
         {include:{$BACKEND_CORE_PATH}/Layout/Templates/Subnavigation.tpl}
