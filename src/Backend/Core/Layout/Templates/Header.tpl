@@ -1,6 +1,6 @@
 <header id="header">
   <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+    <div class="container-fluid">
       <div class="navbar-header text-center">
         <a class="navbar-brand" href="/{option:SITE_MULTILANGUAGE}{$LANGUAGE}{/option:SITE_MULTILANGUAGE}" title="{$lblVisitWebsite|ucfirst}" target="_blank">
           <span class="glyphicon glyphicon-home"></span>&nbsp;{$SITE_TITLE}

@@ -1,5 +1,5 @@
   <footer id="footer">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-xs-2 col-xs-offset-5">
           <p class="text-center text-muted">
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <div id="ajaxSpinner" style="position: fixed; top: 10px; right: 10px; display: none;">
