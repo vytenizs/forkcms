@@ -30,8 +30,12 @@ class Form extends \Common\Core\Form
      */
     public function __construct($name, $action = null, $method = 'post', $hash = null, $useToken = true)
     {
-        $this->URL = Model::getContainer()->get('url');
-        $this->header = Model::getContainer()->get('header');
+        if (Model::getContainer()->has('url')) {
+            $this->URL = Model::getContainer()->get('url');
+        }
+        if (Model::getContainer()->has('header')) {
+            $this->header = Model::getContainer()->get('header');
+        }
 
         $name = (string) $name;
 
@@ -46,7 +50,7 @@ class Form extends \Common\Core\Form
         }
 
         $useToken = (bool) $useToken;
-        $action = ($action === null) ? '/' . $this->URL->getQueryString() : (string) $action;
+        $action = ($action === null) ? '/' . $_SERVER['QUERY_STRING'] : (string) $action;
 
         // call the real form-class
         parent::__construct((string) $name, $action . $hash, $method, (bool) $useToken);
